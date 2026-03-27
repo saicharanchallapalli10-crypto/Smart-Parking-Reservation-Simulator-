@@ -16,8 +16,8 @@ public:
     ParkingSpot(int number) {
         spotNumber = number;
         isAvailable = true;
-        assignedTo = "Assigned to no one!";
-        carModel = "No car!";
+        assignedTo = "Assigned to no one";
+        carModel = "No car";
     }
 
     // Getters
