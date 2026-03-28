@@ -29,15 +29,15 @@ string ParkingSpot::getCarModel() const {
     return carModel;
 }
 
-// THis was very diffuclt oto program as a function. So applgies if it is janky or done wrong! Assigns parking spot to a user object
-void ParkingSpot::reserveSpot(const string& userName, const string& userCarModel, int takenSpots) {
+// THis was very diffuclt to program as a function. So applgies if it is janky or done wrong! Assigns parking spot to a user object
+void ParkingSpot::reserveSpot(const string& userName, const string& userCarModel, int takenSpots, int hours) {
     if (isAvailable) {
         isAvailable = false;
         assignedTo = userName;
         carModel = userCarModel;
         cout << "Spot " << spotNumber << " successfully reserved for " << userName << endl;
         cout << "Car Model: " << carModel << endl;
-        cout << "Total Fee: $" << pricing.calculateFee(takenSpots) << endl;
+        cout << "Total Fee: $" << pricing.calculateFee(takenSpots, hours) << endl;
     } else {
         cout << "Spot " << spotNumber << " is already taken!" << endl;
     }

@@ -14,5 +14,5 @@ double PricingEngine::getBaseRate() const {
 
 // returns the updated baserate that increases by 10 cents for every parking spot taken
 double PricingEngine::calculateFee(int takenSpots) const {
-    return baseRate + (takenSpots * 0.10);
+    return (baseRate + (takenSpots * 0.30)) * hours;
 }

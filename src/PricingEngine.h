@@ -10,7 +10,7 @@ public:
     PricingEngine();
 
     double getBaseRate() const;
-    double calculateFee(int takenSpots) const;
+    double calculateFee(int takenSpots, int hours) const;
 };
 
 #endif

@@ -21,7 +21,7 @@ public:
     string getAssignedTo() const;
     string getCarModel() const;
 
-    void reserveSpot(const string& userName, const string& userCarModel, int takenSpots);
+    void reserveSpot(const string& userName, const string& userCarModel, int takenSpots, int hours);
     void releaseSpot();
     void checkSpot() const;
     string getStatusInfo() const;
