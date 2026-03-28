@@ -1,37 +1,28 @@
+#include "User.h"
 #include <iostream>
-#include <string>
 using namespace std;
 
-class User {
-private:
-    string name;
-    string carModel;
-
-public:
-    // Constructor
-    User(const string& userName, const string& userCarModel) {
-        name = userName;
-        carModel = userCarModel;
-    }
-
-    // Getters
-    string getName() const {
-        return name;
-    }
-
-    string getCarModel() const {
-        return carModel;
-    }
-
-    // Methods
-    void registerUser() {
-        cout << "User registered successfully!" << endl;
-        cout << "Name: " << name << endl;
-        cout << "Car Model: " << carModel << endl;
-    }
-
-    void getUserInfo() const {
-        cout << "Name: " << name << endl;
-        cout << "Car Model: " << carModel << endl;
-    }
-};
+//This allows a user object to be made w
+User::User(const string& userName, const string& userCarModel) {
+    name = userName;
+    carModel = userCarModel;
+}
+//returns users name 
+string User::getName() const {
+    return name;
+}
+//Gets car model of user
+string User::getCarModel() const {
+    return carModel;
+}
+//allows user to register
+void User::registerUser() {
+    cout << "User registered successfully" << endl;
+    cout << "Name: " << name << endl;
+    cout << "Car Model: " << carModel << endl;
+}
+//gets user info from previous data 
+void User::getUserInfo() const {
+    cout << "Name: " << name << endl;
+    cout << "Car Model: " << carModel << endl;
+}
