@@ -23,3 +23,14 @@ Language: C++
 Compiler: g++
 IDE: Visual Studio
 Repository: Github
+
+Folder Structure:
+
+Smart-Parking-Reservation-Simulator-
+    ParkingSpot.cpp
+    ParkingSpot.h
+    ParkingEngine.cpp
+    ParkingEngine.h
+    User.cpp
+    User.h
+    README.md
