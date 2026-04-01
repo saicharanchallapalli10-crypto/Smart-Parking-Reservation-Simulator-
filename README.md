@@ -41,3 +41,7 @@ Project Goals:
 -Model a practical real world system using multiple classes
 -Implement dynamic pricing logic that responds to various conditions
 -Create efficient code as a team with comments and well defind classes
+
+GitHub Repository Purpose:
+
+The repository contains the full source code of our Smart Parking Reservation Simulator in C++. It allows us to collaborate and maintain control of various versions of the project.
