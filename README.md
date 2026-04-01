@@ -16,3 +16,10 @@ User: Represents the person parking. The class stores the user's name and car mo
 ParkingSpot: Represents an individual spot. Manages the "availability state" of parking, assignments of parking to the user, and reporting the current status of parking spots.
 
 PricingEngine: Calculates all of the fee calculations. Computes cost based on a base rate, number of occupied spots, and the duration of hours parked.
+
+Tools and Technology Used:
+
+Language: C++
+Compiler: g++
+IDE: Visual Studio
+Repository: Github
