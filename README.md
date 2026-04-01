@@ -9,3 +9,10 @@ The main functionalities of the program are to:
 -Check availability of parking spots
 -Calculate a parking fee based on occupancy and hours
 
+The OOP Design Summary:
+
+User: Represents the person parking. The class stores the user's name and car model. This model also handles all registration and information display.
+
+ParkingSpot: Represents an individual spot. Manages the "availability state" of parking, assignments of parking to the user, and reporting the current status of parking spots.
+
+PricingEngine: Calculates all of the fee calculations. Computes cost based on a base rate, number of occupied spots, and the duration of hours parked.
