@@ -17,7 +17,7 @@ public:
     ParkingSpot(int number);
 
     int getSpotNumber() const;
-    bool getIsAvailable() const;
+    bool getIsAvailable() const;    
     string getAssignedTo() const;
     string getCarModel() const;
 
