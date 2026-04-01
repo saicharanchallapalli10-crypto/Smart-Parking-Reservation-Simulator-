@@ -1,6 +1,6 @@
 Smart Parking Reservation Simulator
 
-Sitarama Challapalli Adrian Zielinski John Nevin
+Names: Sitarama Challapalli, Adrian Zielinski, John Nevin
 
 This project is supposed to create a smart parking reservation system so users are able to reserve parking spots and be charged a dynamic fee based on lot occupancy and duration.
 
@@ -48,7 +48,7 @@ GitHub Repository Purpose:
 
 The repository contains the full source code of our Smart Parking Reservation Simulator in C++. It allows us to collaborate and maintain control of various versions of the project.
 
-How to run the program (once we add main):
+How to run the program (once we add main and other important pieces of code):
 
 g++ main.cpp User.cpp ParkingSpot.cpp PricingEngine.cpp -o parking_system
 
