@@ -34,3 +34,10 @@ Smart-Parking-Reservation-Simulator-
     User.cpp
     User.h
     README.md
+
+Project Goals:
+
+-Demonstrate understanding of OOP principles such as encapsulation and class composition
+-Model a practical real world system using multiple classes
+-Implement dynamic pricing logic that responds to various conditions
+-Create efficient code as a team with comments and well defind classes
