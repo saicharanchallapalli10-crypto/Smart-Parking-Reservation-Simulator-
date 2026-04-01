@@ -54,3 +54,12 @@ g++ main.cpp User.cpp ParkingSpot.cpp PricingEngine.cpp -o parking_system
 
 ./parking_system
 
+What Has Been Implemented So Far:
+
+-User class: constructors, getters, registerUser(), getUserInfo()
+-ParkingSpot class: constructors, getters, reserveSpot(), releaseSpot(), checkSpot(), getStatusInfo()
+-PricingEngine class: constructor, getBaseRate(), calculateFee(takenSpots, hours)
+-Dynamic fee calculation: base rate of $5.00 + $0.40 per occupied spot, multiplied by the amount of hours
+-Spot status logging via getStatusInfo()
+
+We still need to implement main.cpp, multi-spot management such as a class or array with spots and persistent data storage.
