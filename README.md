@@ -1,3 +1,7 @@
+**Very important note***
+**It is showing I added 40k new lines of code, this is NOT correct. HTTplib.h in the include folder, is a file that had to be installed on my machine through the vscode terminal. This file is 20k lines of code, thus when I pushed my commits multiple times, it says I have 40k lines added to this project. That is not correct, I did not write 20k lines of code, those are program files. Httplib.h is requird so that our program can run on a website**
+
+
 Smart Parking Reservation Simulator
 
 Names: Sitarama Challapalli, Adrian Zielinski, John Nevin
@@ -48,11 +52,11 @@ GitHub Repository Purpose:
 
 The repository contains the full source code of our Smart Parking Reservation Simulator in C++. It allows us to collaborate and maintain control of various versions of the project.
 
-How to run the program (once we add main and other important pieces of code):
+****How to run the program *****:
 
-g++ main.cpp User.cpp ParkingSpot.cpp PricingEngine.cpp -o parking_system
+        1.) g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/PricingEngine.cpp -Iinclude -Isrc -std=c++17 -o parking_server
 
-./parking_system
+       2.) ./parking_server
 
 What Has Been Implemented So Far:
 
