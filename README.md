@@ -1,5 +1,5 @@
-**Very important note***
-**It is showing I added 40k new lines of code, this is NOT correct. HTTplib.h in the include folder, is a file that had to be installed on my machine through the vscode terminal. This file is 20k lines of code, thus when I pushed my commits multiple times, it says I have 40k lines added to this project. That is not correct, I did not write 20k lines of code, those are program files. Httplib.h is requird so that our program can run on a website**
+**Very important note**:
+    **It is showing, I Sitarama Challapall, added 40k new lines of code, this is NOT correct. HTTplib.h in the include folder, is a file that had to be installed on my machine through the vscode terminal. This file is 20k lines of code, thus when I pushed my commits multiple times, it says I have 40k lines added to this project. That is not correct, I did not write 20k lines of code, those are program files. Httplib.h is requird so that our program can run on a website. Please subtract 40k lines when looking at the commit history**
 
 
 Smart Parking Reservation Simulator
