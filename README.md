@@ -89,7 +89,7 @@ g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/Pricing
 
 ---
 
-## What Has Been Implemented So Far
+## What Has Been Implemented So Far (Iteration 05 April 1)
 
 - **User class:** constructors, getters, `registerUser()`, `getUserInfo()`
 - **ParkingSpot class:** constructors, getters, `reserveSpot()`, `releaseSpot()`, `checkSpot()`, `getStatusInfo()`
