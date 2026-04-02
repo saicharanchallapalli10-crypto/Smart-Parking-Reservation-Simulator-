@@ -79,6 +79,8 @@ The repository contains the full source code of our Smart Parking Reservation Si
 
 ## How to Run the Program
 
+**Make sure to accses the folder in which the project is in, cd..., then do the following***
+
 ```bash
 # 1. Compile
 g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/PricingEngine.cpp -Iinclude -Isrc -std=c++17 -o parking_server
