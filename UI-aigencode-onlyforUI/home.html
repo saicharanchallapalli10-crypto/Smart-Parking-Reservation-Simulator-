@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSmart Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Smart Parking Simulator</p>
+                <h1>Parking Dashboard</h1>
+                <p class="subtext">Reserve a spot, release a spot, and view the lot without leaving the page.</p>
+            </div>
+            <a class="status-link" href="/status">Open Status Page</a>
+        </header>
+
+        <section id="feedback" class="feedback hidden" aria-live="polite"></section>
+
+        <section class="summary-grid">
+            <article class="summary-card">
+                <span>Occupied Spots</span>
+                <strong id="takenSpots">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Available Spots</span>
+                <strong id="availableSpots">100</strong>
+            </article>
+            <article class="summary-card">
+                <span>Estimated Cost</span>
+                <strong id="estimatedCost">$0.00</strong>
+                <small id="estimateNote">Enter hours to preview the current cost.</small>
+            </article>
+        </section>
+
+        <section class="panel-grid">
+            <article class="panel">
+                <p class="eyebrow">Reserve</p>
+                <h2>Reserve a parking spot</h2>
+                <p class="subtext">Pricing formula: ($5.00 + $0.30 per occupied spot) x hours.</p>
+
+                <form id="reserveForm" class="form-stack">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" required>
+
+                    <label for="carModel">Car Model</label>
+                    <input id="carModel" name="carModel" type="text" required>
+
+                    <label for="spotNumber">Spot Number</label>
+                    <input id="spotNumber" name="spotNumber" type="number" min="1" max="100" required>
+
+                    <label for="hours">Hours</label>
+                    <input id="hours" name="hours" type="number" min="1" required>
+
+                    <button type="submit">Reserve Spot</button>
+                </form>
+            </article>
+
+            <article class="panel">
+                <p class="eyebrow">Release</p>
+                <h2>Release a parking spot</h2>
+                <p class="subtext">Free up a reserved spot when the driver leaves.</p>
+
+                <form id="releaseForm" class="form-stack compact-form">
+                    <label for="releaseSpotNumber">Spot Number</label>
+                    <input id="releaseSpotNumber" name="spotNumber" type="number" min="1" max="100" required>
+
+                    <button type="submit" class="secondary-button">Release Spot</button>
+                </form>
+
+                <div class="status-panel">
+                    <p class="eyebrow">Full Lot</p>
+                    <h2>See all 100 spots</h2>
+                    <p class="subtext">Open the status page to review every spot and current occupant.</p>
+                    <a class="status-button" href="/status">View Lot Status</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        const summary = {
+            takenSpots: 0,
+            availableSpots: 100,
+            baseRate: 5,
+            spotRate: 0.30
+        };
+
+        const feedback = document.getElementById("feedback");
+        const reserveForm = document.getElementById("reserveForm");
+        const releaseForm = document.getElementById("releaseForm");
+        const hoursInput = document.getElementById("hours");
+        const takenSpotsEl = document.getElementById("takenSpots");
+        const availableSpotsEl = document.getElementById("availableSpots");
+        const estimatedCostEl = document.getElementById("estimatedCost");
+        const estimateNoteEl = document.getElementById("estimateNote");
+
+        function showFeedback(type, message) {
+            feedback.textContent = message;
+            feedback.className = `feedback ${type}`;
+        }
+
+        function updateSummaryCounts(data) {
+            if (typeof data.takenSpots === "number") {
+                summary.takenSpots = data.takenSpots;
+            }
+            if (typeof data.availableSpots === "number") {
+                summary.availableSpots = data.availableSpots;
+            }
+
+            takenSpotsEl.textContent = summary.takenSpots;
+            availableSpotsEl.textContent = summary.availableSpots;
+        }
+
+        function renderEstimate() {
+            const hours = Number(hoursInput.value);
+            if (!hours || hours < 1) {
+                estimatedCostEl.textContent = "$0.00";
+                estimateNoteEl.textContent = "Enter hours to preview the current cost.";
+                return;
+            }
+
+            const total = (summary.baseRate + (summary.takenSpots * summary.spotRate)) * hours;
+            estimatedCostEl.textContent = `$${total.toFixed(2)}`;
+            estimateNoteEl.textContent = `Based on ${summary.takenSpots} occupied spots right now.`;
+        }
+
+        async function loadSummary() {
+            try {
+                const response = await fetch("/summary");
+                const data = await response.json();
+                summary.baseRate = data.baseRate;
+                summary.spotRate = data.spotRate;
+                updateSummaryCounts(data);
+                renderEstimate();
+            } catch (error) {
+                showFeedback("error", "Could not load the latest parking summary.");
+            }
+        }
+
+        async function sendForm(url, form) {
+            const payload = new URLSearchParams(new FormData(form));
+            const response = await fetch(url, {
+                method: "POST",
+                body: payload
+            });
+
+            const data = await response.json();
+            updateSummaryCounts(data);
+            renderEstimate();
+            return data;
+        }
+
+        reserveForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            try {
+                const data = await sendForm("/reserve", reserveForm);
+                const message = data.success && data.fee
+                    ? `${data.message} Total cost: ${data.fee}.`
+                    : data.message;
+                showFeedback(data.success ? "success" : "error", message);
+
+                if (data.success) {
+                    reserveForm.reset();
+                    renderEstimate();
+                }
+            } catch (error) {
+                showFeedback("error", "Could not complete the reservation right now.");
+            }
+        });
+
+        releaseForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            try {
+                const data = await sendForm("/release", releaseForm);
+                showFeedback(data.success ? "success" : "error", data.message);
+
+                if (data.success) {
+                    releaseForm.reset();
+                }
+            } catch (error) {
+                showFeedback("error", "Could not release the spot right now.");
+            }
+        });
+
+        hoursInput.addEventListener("input", renderEstimate);
+        loadSummary();
+    </script>
+</body>
+</html>

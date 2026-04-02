@@ -7,6 +7,7 @@ ParkingSpot::ParkingSpot(int number) {
     isAvailable = true;
     assignedTo = "Assigned to no one";
     carModel = "No car";
+    reservedHours = 0;
 }
 
 //gets parking spot number for a user
@@ -29,14 +30,21 @@ string ParkingSpot::getCarModel() const {
     return carModel;
 }
 
+//gets how long the spot is reserved for
+int ParkingSpot::getReservedHours() const {
+    return reservedHours;
+}
+
 // THis was very diffuclt to program as a function. So applgies if it is janky or done wrong! Assigns parking spot to a user object
 void ParkingSpot::reserveSpot(const string& userName, const string& userCarModel, int takenSpots, int hours) {
     if (isAvailable) {
         isAvailable = false;
         assignedTo = userName;
         carModel = userCarModel;
+        reservedHours = hours;
         cout << "Spot " << spotNumber << " successfully reserved for " << userName << endl;
         cout << "Car Model: " << carModel << endl;
+        cout << "Reserved Hours: " << reservedHours << endl;
         cout << "Total Fee: $" << pricing.calculateFee(takenSpots, hours) << endl;
     } else {
         cout << "Spot " << spotNumber << " is already taken!" << endl;
@@ -48,6 +56,7 @@ void ParkingSpot::releaseSpot() {
     isAvailable = true;
     assignedTo = "Assigned to no one!";
     carModel = "No car!";
+    reservedHours = 0;
     cout << "Spot " << spotNumber << " is now available." << endl;
 }
 
@@ -56,15 +65,17 @@ void ParkingSpot::checkSpot() const {
     if (isAvailable) {
         cout << "Spot " << spotNumber << " is available." << endl;
     } else {
-        cout << "Spot " << spotNumber << " is taken by " << assignedTo << " - " << carModel << endl;
+        cout << "Spot " << spotNumber << " is taken by " << assignedTo << " - " << carModel
+             << " for " << reservedHours << " hours" << endl;
     }
 }
 
 //This allows a log to be printed on the website to see who has which parking spot
 string ParkingSpot::getStatusInfo() const {
     if (isAvailable) {
-        return "Spot " + to_string(spotNumber) + " ################ Assigned to no one! ###################No car!";
+        return "Spot " + to_string(spotNumber) + " ################ Assigned to no one! ###################No car!###############0 hours";
     } else {
-        return "Spot " + to_string(spotNumber) + " --------------------- " + assignedTo + " --------------" + carModel;
+        return "Spot " + to_string(spotNumber) + " --------------------- " + assignedTo + " --------------" + carModel
+            + " -------------- " + to_string(reservedHours) + " hours";
     }
 }

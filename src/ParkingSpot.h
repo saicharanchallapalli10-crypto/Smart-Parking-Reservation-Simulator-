@@ -11,15 +11,17 @@ private:
     bool isAvailable;
     string assignedTo;
     string carModel;
+    int reservedHours;
     PricingEngine pricing;
 
 public:
     ParkingSpot(int number);
 
     int getSpotNumber() const;
-    bool getIsAvailable() const;    
+    bool getIsAvailable() const;
     string getAssignedTo() const;
     string getCarModel() const;
+    int getReservedHours() const;
 
     void reserveSpot(const string& userName, const string& userCarModel, int takenSpots, int hours);
     void releaseSpot();
