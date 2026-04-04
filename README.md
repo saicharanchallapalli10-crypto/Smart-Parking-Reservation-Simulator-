@@ -1,5 +1,5 @@
 **Very important note:**
-**It is showing, I Sitarama Challapalli, added 40k new lines of code, this is NOT correct. httplib.h in the include folder, is a file that had to be installed on my machine through the vscode terminal. This file is 20k lines of code, thus when I pushed my commits multiple times, it says I have 40k lines added to this project. That is not correct, I did not write 20k lines of code, those are program files. httplib.h is required so that our program can run on a website. Please subtract 39,300 lines when looking at the commit history. I roughly only have around 400 lines of code committed, not including the AI generated one for the only the UI**
+**It is showing, I Sitarama Challapalli, added 40k new lines of code, this is NOT correct. httplib.h in the include folder, is a file that had to be installed on my machine through the vscode terminal. This file is 20k lines of code, thus when I pushed my commits multiple times, it says I have 40k lines added to this project. That is not correct, I did not write 20k lines of code, those are program files. httplib.h is required so that our program can run on a website. Please subtract 41,409 lines when looking at the commit history. I roughly only have around 400 lines of code committed, not including the AI generated one for the only the UI**
 
 ---
 
