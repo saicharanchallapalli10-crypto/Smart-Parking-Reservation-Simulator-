@@ -10,38 +10,34 @@ ParkingSpot::ParkingSpot(int number) {
     reservedHours = 0;
 }
 
-//gets parking spot number for a user
 int ParkingSpot::getSpotNumber() const {
     return spotNumber;
 }
 
-//checks if parking spot is taken
 bool ParkingSpot::getIsAvailable() const {
     return isAvailable;
 }
 
-//Sees who the parking spot is asinged to
 string ParkingSpot::getAssignedTo() const {
     return assignedTo;
 }
 
-//gets car model associated with parking spot
 string ParkingSpot::getCarModel() const {
     return carModel;
 }
 
-//gets how long the spot is reserved for
 int ParkingSpot::getReservedHours() const {
     return reservedHours;
 }
 
-// THis was very diffuclt to program as a function. So applgies if it is janky or done wrong! Assigns parking spot to a user object
 void ParkingSpot::reserveSpot(const string& userName, const string& userCarModel, int takenSpots, int hours) {
     if (isAvailable) {
+        // The current app stores reservation data directly inside each spot object.
         isAvailable = false;
         assignedTo = userName;
         carModel = userCarModel;
         reservedHours = hours;
+
         cout << "Spot " << spotNumber << " successfully reserved for " << userName << endl;
         cout << "Car Model: " << carModel << endl;
         cout << "Reserved Hours: " << reservedHours << endl;
@@ -51,8 +47,8 @@ void ParkingSpot::reserveSpot(const string& userName, const string& userCarModel
     }
 }
 
-//Release parking spot for a user
 void ParkingSpot::releaseSpot() {
+    // Reset the spot back to its default empty state.
     isAvailable = true;
     assignedTo = "Assigned to no one!";
     carModel = "No car!";
@@ -60,7 +56,6 @@ void ParkingSpot::releaseSpot() {
     cout << "Spot " << spotNumber << " is now available." << endl;
 }
 
-//checks to see if parking spot is avliable
 void ParkingSpot::checkSpot() const {
     if (isAvailable) {
         cout << "Spot " << spotNumber << " is available." << endl;
@@ -70,7 +65,7 @@ void ParkingSpot::checkSpot() const {
     }
 }
 
-//This allows a log to be printed on the website to see who has which parking spot
+// This older text format is still used by the simple /check route.
 string ParkingSpot::getStatusInfo() const {
     if (isAvailable) {
         return "Spot " + to_string(spotNumber) + " ################ Assigned to no one! ###################No car!###############0 hours";

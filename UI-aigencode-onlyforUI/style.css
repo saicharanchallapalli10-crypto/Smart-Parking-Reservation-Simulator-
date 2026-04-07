@@ -24,6 +24,7 @@ body {
     color: var(--text);
 }
 
+/* Page layout */
 .app-shell {
     max-width: 1080px;
     margin: 0 auto;
@@ -87,25 +88,37 @@ button {
     padding: 12px 16px;
 }
 
-.feedback {
-    margin-bottom: 20px;
+/* Shared success and error messages */
+.feedback,
+.inline-feedback {
     padding: 14px 16px;
     border-radius: 12px;
     font-weight: 600;
 }
 
-.feedback.hidden {
+.feedback {
+    margin-bottom: 20px;
+}
+
+.inline-feedback {
+    margin-top: 14px;
+}
+
+.feedback.hidden,
+.inline-feedback.hidden {
     display: none;
 }
 
-.feedback.success {
+.feedback.success,
+.inline-feedback.success {
     display: block;
     background: var(--success-bg);
     color: var(--success-text);
     border: 1px solid #bbf7d0;
 }
 
-.feedback.error {
+.feedback.error,
+.inline-feedback.error {
     display: block;
     background: var(--error-bg);
     color: var(--error-text);
@@ -152,6 +165,7 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+/* Form spacing and inputs */
 .panel {
     padding: 22px;
 }
@@ -195,6 +209,7 @@ button,
     padding: 18px;
 }
 
+/* Small-screen layout */
 @media (max-width: 860px) {
     .summary-grid,
     .panel-grid {

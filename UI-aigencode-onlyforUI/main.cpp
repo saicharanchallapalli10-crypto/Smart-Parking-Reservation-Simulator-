@@ -9,6 +9,7 @@
 #include "ParkingSpot.h"
 using namespace std;
 
+// Reads a whole file into a string so the server can return HTML or CSS.
 string readFile(const string& path) {
     ifstream file(path);
     if (!file) {
@@ -20,6 +21,7 @@ string readFile(const string& path) {
     return buffer.str();
 }
 
+// Escapes special characters before text is placed inside a JSON string.
 string escapeJson(const string& value) {
     string escaped;
     for (char c : value) {
@@ -35,6 +37,7 @@ string escapeJson(const string& value) {
     return escaped;
 }
 
+// Escapes text before it is written into raw HTML.
 string escapeHtml(const string& value) {
     string escaped;
     for (char c : value) {
@@ -50,13 +53,15 @@ string escapeHtml(const string& value) {
     return escaped;
 }
 
+// Formats prices like 12.50 instead of 12.5.
 string formatCurrency(double amount) {
     ostringstream stream;
     stream << fixed << setprecision(2) << amount;
     return stream.str();
 }
 
-// Global array of 100 parking spots
+// This array is the app's current storage layer.
+// Because it lives in memory, reservations reset when the server stops.
 ParkingSpot spots[100] = {
     ParkingSpot(1),   ParkingSpot(2),   ParkingSpot(3),   ParkingSpot(4),   ParkingSpot(5),
     ParkingSpot(6),   ParkingSpot(7),   ParkingSpot(8),   ParkingSpot(9),   ParkingSpot(10),
@@ -80,6 +85,7 @@ ParkingSpot spots[100] = {
     ParkingSpot(96),  ParkingSpot(97),  ParkingSpot(98),  ParkingSpot(99),  ParkingSpot(100)
 };
 
+// Count occupied spots so pricing and summary cards stay in sync.
 int countTakenSpots() {
     int takenSpots = 0;
     for (const ParkingSpot& spot : spots) {
@@ -90,6 +96,7 @@ int countTakenSpots() {
     return takenSpots;
 }
 
+// Reserve and release both use this helper so the frontend gets one predictable JSON shape.
 string buildJsonResponse(bool success, const string& message, const string& fee = "") {
     const int takenSpots = countTakenSpots();
     const int availableSpots = 100 - takenSpots;
@@ -105,6 +112,7 @@ string buildJsonResponse(bool success, const string& message, const string& fee 
     return json.str();
 }
 
+// Builds the full HTML status page by reading each ParkingSpot and writing one table row.
 string buildStatusPage() {
     const int takenSpots = countTakenSpots();
     const int availableSpots = 100 - takenSpots;
@@ -170,6 +178,7 @@ int main() {
     const string homePage = readFile("UI-aigencode-onlyforUI/home.html");
     const string styleSheet = readFile("UI-aigencode-onlyforUI/style.css");
 
+    // Serve the homepage.
     server.Get("/", [homePage](const httplib::Request&, httplib::Response& res) {
         if (homePage.empty()) {
             res.status = 500;
@@ -180,6 +189,7 @@ int main() {
         res.set_content(homePage, "text/html");
     });
 
+    // Serve the shared stylesheet used by the homepage.
     server.Get("/style.css", [styleSheet](const httplib::Request&, httplib::Response& res) {
         if (styleSheet.empty()) {
             res.status = 500;
@@ -190,6 +200,7 @@ int main() {
         res.set_content(styleSheet, "text/css");
     });
 
+    // Send summary data used by the dashboard cards and live cost estimate.
     server.Get("/summary", [](const httplib::Request&, httplib::Response& res) {
         const int takenSpots = countTakenSpots();
         const int availableSpots = 100 - takenSpots;
@@ -212,6 +223,7 @@ int main() {
             int choice = stoi(req.get_param_value("spotNumber"));
             int hours = stoi(req.get_param_value("hours"));
 
+            // Validate the basic form inputs before touching the spots array.
             if (name.empty() || carModel.empty()) {
                 res.status = 400;
                 res.set_content(buildJsonResponse(false, "Please enter a name and car model."), "application/json");
@@ -268,6 +280,7 @@ int main() {
                 return;
             }
 
+            // Read the name first because releaseSpot clears the stored user data.
             const string departingName = spots[choice - 1].getAssignedTo();
             spots[choice - 1].releaseSpot();
             res.set_content(buildJsonResponse(true, "Goodbye, " + departingName + "! Spot " + to_string(choice) + " is now available."), "application/json");
@@ -277,6 +290,7 @@ int main() {
         }
     });
 
+    // Simple single-spot check route kept for basic debugging.
     server.Get("/check", [](const httplib::Request& req, httplib::Response& res) {
         try {
             int choice = stoi(req.get_param_value("spotNumber"));
@@ -302,5 +316,3 @@ int main() {
     server.listen("localhost", 8080);
     return 0;
 }
-
-
