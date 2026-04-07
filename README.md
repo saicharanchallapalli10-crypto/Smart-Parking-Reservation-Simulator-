@@ -89,7 +89,7 @@ g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/Pricing
 ./parking_server
 
 # 3. Exit
-do crt + c to end the server
+"crtl + c" to end the server
 ```
 
 ---
