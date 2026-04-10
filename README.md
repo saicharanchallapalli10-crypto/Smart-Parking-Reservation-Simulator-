@@ -75,22 +75,24 @@ Smart-Parking-Reservation-Simulator/
 
 The repository contains the full source code of our Smart Parking Reservation Simulator in C++. It allows us to collaborate and maintain control of various versions of the project.
 
----
+# 1. Clone the repo
+git clone https://github.com/saicharanchallapalli10-crypto/Smart-Parking-Reservation-Simulator-.git
+
+# 2. Go into the folder
+cd Smart-Parking-Reservation-Simulator-
+
+# 3. Compile
+g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/PricingEngine.cpp -Iinclude -Isrc -std=c++17 -o parking_server
+
+# 4. Run
+./parking_server---
 
 ## How to Run the Program
 
 **Make sure to accses the folder in which the project is in, cd..., then do the following***
 
 ```bash
-# 1. Compile
-g++ UI-aigencode-onlyforUI/main.cpp src/User.cpp src/ParkingSpot.cpp src/PricingEngine.cpp -Iinclude -Isrc -std=c++17 -o parking_server
 
-# 2. Run
-./parking_server
-
-# 3. Exit
-"crtl + c" to end the server
-```
 
 ---
 
